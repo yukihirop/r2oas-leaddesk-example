@@ -1,0 +1,21 @@
+---
+components:
+  schemas:
+    GdprManuscriptResult:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        manuscript_name:
+          type: string
+        fields:
+          type: array
+          items:
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+            type: object
+      xml:
+        name: GdprManuscriptResult

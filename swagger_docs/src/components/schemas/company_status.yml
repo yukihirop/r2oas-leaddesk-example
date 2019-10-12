@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CompanyStatus:
+      properties:
+        id:
+          description: Company status id
+          type: integer
+        name:
+          description: Company status name
+          type: string
+      xml:
+        name: CompanyStatus

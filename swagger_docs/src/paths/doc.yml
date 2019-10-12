@@ -1,0 +1,21 @@
+---
+paths:
+  "/doc":
+    get:
+      tags:
+      - doc
+      summary: API Documentation
+      description: Returns Swagger/OpenAPI specification formatted API documentation
+        you are currently reading.
+      responses:
+        '200':
+          description: JSON formatted documentation. See https://swagger.io/docs/
+            for more info.
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalErrorExample"
+      security: []

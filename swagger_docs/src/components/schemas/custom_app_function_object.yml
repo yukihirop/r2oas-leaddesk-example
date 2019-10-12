@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CustomAppFunctionObject:
+      xml:
+        name: CustomAppFunctionObject
+      allOf:
+      - "$ref": "#/components/schemas/CustomAppFunction"
+      - properties:
+          _links:
+            items:
+              "$ref": "#/components/schemas/linksObjects"
+        type: object

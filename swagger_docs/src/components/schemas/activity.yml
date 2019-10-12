@@ -1,0 +1,24 @@
+---
+components:
+  schemas:
+    Activity:
+      properties:
+        id:
+          description: Activity id
+          type: integer
+        name:
+          description: Activity name
+          type: string
+          maxLength: 100
+          minLength: 1
+        billable:
+          description: Is activity billable
+          type: integer
+        payable:
+          description: Is activity payable
+          type: integer
+        internal:
+          description: Is activity considered internal (it cannot be renamed or deleted)
+          type: string
+      xml:
+        name: Activity

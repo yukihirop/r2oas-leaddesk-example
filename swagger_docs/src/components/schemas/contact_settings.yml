@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    contactSettings:
+      properties:
+        name:
+          description: Contact field name. Run GET /campaigns/{id} to get full list
+            of field names
+          type: string
+        type:
+          description: Contact field type. Define whether field is text or dropdown
+            etc
+          type: string
+          default: text
+          enum:
+          - text
+          - dropdown
+        values:
+          description: If field is for example of type dropdown, define possible values
+            here. Can also be empty -> dropdown has no values
+          type: array
+          items:
+            "$ref": "#/components/schemas/contactSettingValues"
+        hidden:
+          description: Make contact field invisible
+          type: boolean
+        mandatory_contact_detail:
+          description: Make filling of contact field mandatory
+          type: boolean
+        mandatory_order_detail:
+          description: Make filling of contact field mandatory for an order
+          type: boolean
+      xml:
+        name: contactSettings

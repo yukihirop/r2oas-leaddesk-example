@@ -1,0 +1,14 @@
+---
+components:
+  schemas:
+    PostCallRobotInput:
+      required:
+      - name
+      properties:
+        name:
+          description: Call robot name
+          type: string
+          maxLength: 255
+          minLength: 2
+      xml:
+        name: PostCallRobotInput

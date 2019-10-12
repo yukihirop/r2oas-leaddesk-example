@@ -1,0 +1,28 @@
+---
+components:
+  schemas:
+    CampaignCollection:
+      properties:
+        id:
+          description: Campaign id
+          type: integer
+        name:
+          description: Campaign name
+          type: string
+        desc:
+          description: Campaign description
+          type: string
+        office:
+          description: Campaign office
+          type: string
+        created_at:
+          description: Campaign creation date
+          type: string
+        updated_at:
+          description: Campaign last updated date
+          type: string
+        disabled:
+          description: Is campaign disabled
+          type: boolean
+      xml:
+        name: CampaignCollection

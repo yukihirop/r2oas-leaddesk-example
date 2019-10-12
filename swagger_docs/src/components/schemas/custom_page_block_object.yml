@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CustomPageBlockObject:
+      xml:
+        name: CustomPageBlockObject
+      allOf:
+      - "$ref": "#/components/schemas/CustomPageBlock"
+      - properties:
+          _links:
+            items:
+              "$ref": "#/components/schemas/linksObjects"
+        type: object

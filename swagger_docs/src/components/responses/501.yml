@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '501':
+      description: Not Implemented - Error caused by requesting an operation that
+        is not yet fully implemented.

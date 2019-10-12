@@ -1,0 +1,42 @@
+---
+components:
+  schemas:
+    ProductGroup:
+      properties:
+        id:
+          description: Product group id
+          type: integer
+          example: '1'
+        name:
+          description: Product group name
+          type: string
+          maxLength: 100
+          minLength: 1
+          example: product group A
+        sponsor:
+          description: Sponsor name
+          type: string
+          example: LeadDesk
+        office:
+          description: Office name
+          type: string
+          example: office B
+        desc:
+          description: Free text description of the group
+          type: string
+        created_at:
+          description: group's creation time
+          type: string
+          format: date-time
+        updated_at:
+          description: group's last modification time. Does not include product attachment
+            changes.
+          type: string
+          format: date-time
+        products:
+          description: Product group products
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+      xml:
+        name: ProductGroup

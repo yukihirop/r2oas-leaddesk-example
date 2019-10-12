@@ -1,0 +1,64 @@
+---
+paths:
+  "/public_keys/signature/pem":
+    get:
+      tags:
+      - public_keys
+      summary: Fetch public signature keys (PEM format)
+      description: Private signature key is used to sign JWT originating from LeadDesk.
+        Use public keys to validate JWT authenticity. Returns keys in PEM format.
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/PublicKeyPem"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx and 5xx errors except
+            validation error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InternalErrorExample"
+      security: []
+  "/public_keys/signature/{kid}/pem":
+    get:
+      tags:
+      - public_keys
+      summary: Fetch public signature key (PEM format)
+      description: Private signature key is used to sign JWT originating from LeadDesk.
+        Use public keys to validate JWT authenticity. Returns key in PEM format
+      parameters:
+      - name: kid
+        in: query
+        description: Key id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PublicKeyPem"
+        default:
+          description: Server rejection. Covers all HTTP 4xx and 5xx errors except
+            validation error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/NotFoundErrorExample"
+      security: []

@@ -1,0 +1,40 @@
+---
+paths:
+  "/client":
+    get:
+      tags:
+      - client
+      summary: Fetch details of the current client
+      description: Returns details about the authenticated client
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: client id
+                    type: integer
+                    example: 3
+                  name:
+                    description: client name
+                    type: string
+                    example: My Client
+                  created_at:
+                    description: time of client creation
+                    type: string
+                    example: '2015-10-30 08:06:13'
+                  identification_key:
+                    description: client's identification key (requires admin priviledges)
+                    type: string
+                    example: c14bd526c89d2a5cc6ba96c731297cb5
+                  _links:
+                    "$ref": "#/components/schemas/linksObjects"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

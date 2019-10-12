@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    Contact:
+      properties:
+        id:
+          description: Contact id
+          type: integer
+        first_name:
+          description: Contact firstname
+          type: string
+        last_name:
+          description: Contact surname
+          type: string
+      xml:
+        name: Contact

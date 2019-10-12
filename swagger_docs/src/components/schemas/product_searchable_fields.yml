@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    ProductSearchableFields:
+      properties:
+        name:
+          description: Product name
+          type: string
+        office:
+          description: Product office
+          type: string
+        product_code:
+          description: Product code
+          type: string
+      xml:
+        name: ProductSearchableFields

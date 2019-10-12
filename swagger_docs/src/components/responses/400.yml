@@ -1,0 +1,7 @@
+---
+components:
+  responses:
+    '400':
+      description: Bad Request - Generic error when something in the request is wrong.
+        It could be lacking some mandatory fields or has non-acceptable values for
+        properties. Check the response JSON object for more details.

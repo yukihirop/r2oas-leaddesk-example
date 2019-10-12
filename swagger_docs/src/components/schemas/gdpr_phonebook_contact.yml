@@ -1,0 +1,11 @@
+---
+components:
+  schemas:
+    GdprPhonebookContact:
+      properties:
+        phone_number:
+          type: string
+        name:
+          type: string
+      xml:
+        name: GdprPhonebookContact

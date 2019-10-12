@@ -1,0 +1,266 @@
+---
+paths:
+  "/contact_lists":
+    get:
+      tags:
+      - contact_lists
+      summary: Fetch contact lists
+      description: Fetch contact lists
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - office
+      - name: name
+        in: query
+        description: Filter results based on contact list name
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on contact list office
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ContactListCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/contact_lists/archive":
+    get:
+      tags:
+      - contact_lists
+      summary: Fetch archived contact lists
+      description: Fetch archived contact lists
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - office
+            - legend
+      - name: name
+        in: query
+        description: Filter results based on archived contact list name
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on archived contact list office
+        required: false
+        schema:
+          type: string
+      - name: legend
+        in: query
+        description: Filter results based on archived contact list legend
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort fields ascending or descending order by using following
+          format: {field}:{order}. Multiple fields can be combined when separated
+          with a comma.'
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - name
+            - legend
+            - created_at
+            - updated_at
+            - office
+            - expiry_date
+            - contacts_total
+            - contacts_remaining
+            - group
+            - sponsor
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ArchivedContactListCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/contact_lists/archive/{id}":
+    delete:
+      tags:
+      - contact_lists
+      summary: Delete an archived contact list
+      description: Delete an archived contact list
+      parameters:
+      - name: id
+        in: path
+        description: Archived contact list id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/contact_lists/archive/{id}/operations/anonymize":
+    post:
+      tags:
+      - contact_lists
+      summary: Anonymize an archived contact list
+      description: Anonymize an archived contact list. The anonymize operation will
+        happen with a delay (usually during the next night).
+      parameters:
+      - name: id
+        in: path
+        description: Archived contact list id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/AnonymizeArchivedContactListInput"
+        description: Request body containing new values
+        required: true
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/contact_lists/archive/{id}/operations/unarchive":
+    post:
+      tags:
+      - contact_lists
+      summary: Unarchive an archived contact list
+      description: Unarchive an archived contact list
+      parameters:
+      - name: id
+        in: path
+        description: Archived contact list id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UnarchiveArchivedContactListInput"
+        description: Request body containing new values
+        required: true
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/contact_lists/{id}/operations/archive":
+    post:
+      tags:
+      - contact_lists
+      summary: Archive a contact list
+      description: Archive a contact list
+      parameters:
+      - name: id
+        in: path
+        description: Contact list id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

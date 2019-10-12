@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    ProductGroupSearchableFields:
+      properties:
+        name:
+          description: Product group name
+          type: string
+        office:
+          description: Product group office
+          type: string
+      xml:
+        name: ProductGroupSearchableFields

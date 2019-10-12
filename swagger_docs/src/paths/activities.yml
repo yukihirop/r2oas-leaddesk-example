@@ -1,0 +1,167 @@
+---
+paths:
+  "/activities":
+    get:
+      tags:
+      - activities
+      summary: Fetch activities
+      description: Fetch activities
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+      - name: name
+        in: query
+        description: Filter results based on activity name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation. Returns an array of activities.
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ActivityCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - activities
+      summary: Create a new activity
+      description: Create a new activity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostActivityInput"
+        description: Request body containing new values
+      responses:
+        '200':
+          description: Successful operation. Returns the created activity id.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/activities/{id}":
+    get:
+      tags:
+      - activities
+      summary: Fetch an activity
+      description: Fetch an activity.
+      operationId: getActivityById
+      parameters:
+      - name: id
+        in: path
+        description: Activity id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns an activity.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ResponseActivityObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - activities
+      summary: Delete an activity
+      description: Delete an activity
+      parameters:
+      - name: id
+        in: path
+        description: Activity id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - activities
+      summary: Modify an existing activity
+      description: Modify an existing activity
+      parameters:
+      - name: id
+        in: path
+        description: Activity id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PatchActivityInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

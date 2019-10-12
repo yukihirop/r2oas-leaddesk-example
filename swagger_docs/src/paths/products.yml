@@ -1,0 +1,258 @@
+---
+paths:
+  "/products":
+    get:
+      tags:
+      - products
+      summary: Fetch products
+      description: Fetch products
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - office
+            - product_code
+      - name: name
+        in: query
+        description: Filter results based on product name
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on product office
+        required: false
+        schema:
+          type: string
+      - name: product_code
+        in: query
+        description: Filter results based on product code
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ProductCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - products
+      summary: Create a new product
+      description: Create a new product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostProductInput"
+        description: Request body containing new values
+      responses:
+        '200':
+          description: Successful operation. Returns created product id.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/products/{id}":
+    get:
+      tags:
+      - products
+      summary: Fetch a product
+      description: Fetch a product.
+      operationId: getProductById
+      parameters:
+      - name: id
+        in: path
+        description: Product id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a product.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProductObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - products
+      summary: Delete a product
+      description: Delete a product
+      parameters:
+      - name: id
+        in: path
+        description: Product id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - products
+      summary: Modify an existing product
+      description: Modify an existing product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PatchProductInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/products/{id}/options":
+    get:
+      tags:
+      - products
+      summary: Fetch products options
+      description: Fetch products options
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+      - name: name
+        in: query
+        description: Filter results based on option name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ProductOptionCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/products/{id}/options/{optionid}":
+    get:
+      tags:
+      - products
+      summary: Fetch a product option
+      description: Fetch a product option
+      operationId: getProductById
+      parameters:
+      - name: id
+        in: path
+        description: Product id
+        required: true
+        schema:
+          type: integer
+      - name: optionid
+        in: query
+        description: Option id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a product.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProductOptionObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

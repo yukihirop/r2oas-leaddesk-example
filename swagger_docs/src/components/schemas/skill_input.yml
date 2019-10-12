@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    SkillInput:
+      properties:
+        id:
+          description: Skill id
+          type: integer
+          minimum: 1
+        points:
+          description: User's points for current skill
+          type: integer
+          maximum: 10
+          minimum: 1
+      xml:
+        name: SkillInput

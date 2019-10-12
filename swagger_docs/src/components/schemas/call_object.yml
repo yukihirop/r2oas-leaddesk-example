@@ -1,0 +1,57 @@
+---
+components:
+  schemas:
+    CallObject:
+      properties:
+        id:
+          description: call id
+          type: integer
+        number:
+          description: Call phone number
+          type: string
+        campaign:
+          description: Active campaign
+          properties:
+            id:
+              type: integer
+        result:
+          "$ref": "#/components/schemas/CallResult"
+        record_file:
+          description: Call recording file url
+          type: string
+        comment:
+          description: Call comment
+          type: string
+        direction:
+          description: Call direction. In or out
+          type: string
+        caller:
+          "$ref": "#/components/schemas/User"
+        contact:
+          "$ref": "#/components/schemas/Contact"
+        contact_list:
+          "$ref": "#/components/schemas/ContactList"
+        answered:
+          description: Call was answered
+          type: boolean
+        called_at:
+          description: time when call was made
+          type: string
+        ringing_started_at:
+          description: time when call started ringing
+          type: string
+        ringing_ended_at:
+          description: time when call stopped ringing
+          type: string
+        connected_at:
+          description: time when call was connected
+          type: string
+        disconnected_at:
+          description: time when call was disconnected
+          type: string
+        _links:
+          properties:
+            self:
+              type: string
+      xml:
+        name: CallObject

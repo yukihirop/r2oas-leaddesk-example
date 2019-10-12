@@ -1,0 +1,9 @@
+---
+info:
+  title: LeadDesk REST API
+  description: LeadDesk RESTful API is used by HTTP requests sent for the the correct
+    URI. Requests should be made using the HTTPS protocol so that traffic is encrypted
+    to protect the authentication.
+  contact:
+    email: support@leaddesk.com
+  version: ''

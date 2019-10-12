@@ -1,0 +1,12 @@
+---
+components:
+  requestBodies:
+    genericIdObjectArray:
+      content:
+        application/json:
+          schema:
+            property: products
+            type: array
+            items:
+              "$ref": "#/components/schemas/genericIdObject"
+      description: Request body comprising of objects each containing a product id

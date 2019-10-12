@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '403':
+      description: Forbidden - You are not allowed to do such operation. E.g. creation
+        with read-only token.

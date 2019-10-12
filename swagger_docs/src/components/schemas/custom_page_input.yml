@@ -1,0 +1,47 @@
+---
+components:
+  schemas:
+    CustomPageInput:
+      required:
+      - name
+      properties:
+        name:
+          description: Custom page name
+          type: string
+          maxLength: 255
+          minLength: 1
+        location:
+          description: Location for the custom page
+          type: string
+          enum:
+          - dashboard
+          - statistics
+          - campaigns
+          - agents_mng
+          - calling_list_management
+          - product
+          - b2b_mng
+          - qatab
+          - inbound
+          - general_settings
+        url:
+          description: Custom page URL
+          type: string
+          maxLength: 2048
+          minLength: 1
+        sandbox:
+          description: Iframe sandbox attributes (separated by space)
+          type: string
+          maxLength: 255
+          enum:
+          - allow-forms
+          - allow-pointer-lock
+          - allow-popups
+          - allow-same-origin
+          - allow-scripts
+          - allow-top-navigation
+        height:
+          description: Custom page iframe height in pixels
+          type: integer
+      xml:
+        name: CustomPageInput

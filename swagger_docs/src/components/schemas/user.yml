@@ -1,0 +1,37 @@
+---
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          description: User id
+          type: integer
+        role:
+          description: User role (admin, manager, team leader, agent etc)
+          type: string
+        name:
+          description: User name
+          type: string
+        username:
+          description: User username
+          type: string
+        office:
+          description: User office
+          type: string
+        employment:
+          description: User employment status
+          type: string
+          enum:
+          - inactive
+          - active
+        login_time:
+          description: User login time. NULL if not logged in.
+          type: string
+        created_at:
+          description: User creation date
+          type: string
+        updated_at:
+          description: User last updated date
+          type: string
+      xml:
+        name: User

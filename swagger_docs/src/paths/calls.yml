@@ -1,0 +1,124 @@
+---
+paths:
+  "/calls/{id}":
+    get:
+      tags:
+      - calls
+      summary: Fetch a call
+      description: Fetch a call.
+      operationId: getCallById
+      parameters:
+      - name: id
+        in: path
+        description: Call id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a call.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CallObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/calls/{id}/record_file":
+    delete:
+      tags:
+      - calls
+      summary: Delete call recording
+      description: Delete call recording
+      parameters:
+      - name: id
+        in: path
+        description: Call id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/calls/{id}/result":
+    get:
+      tags:
+      - calls
+      summary: Fetch result attached to a call
+      description: Fetch call result attached to given call
+      parameters:
+      - name: id
+        in: path
+        description: call id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  result:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CallResult"
+                  _links:
+                    properties:
+                      self:
+                        type: string
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - calls
+      summary: Set result to a call
+      description: Set result to a call. Only results attached to call's campaign
+        are supported
+      parameters:
+      - name: id
+        in: path
+        description: Call id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostCallResultInput"
+        description: Call result's id. This result needs to be a global result or
+          a result attached to call's campaign
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

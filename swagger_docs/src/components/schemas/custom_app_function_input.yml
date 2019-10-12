@@ -1,0 +1,46 @@
+---
+components:
+  schemas:
+    CustomAppFunctionInput:
+      required:
+      - name
+      properties:
+        name:
+          description: External application function name
+          type: string
+          maxLength: 255
+          minLength: 1
+        location:
+          description: Location for the application function in LeadDesk
+          type: string
+          enum:
+          - admin.contact-lists.toolbar
+          - admin.campaign-list.toolbar
+        url:
+          description: URL pointing to external application endpoint
+          type: string
+          maxLength: 2048
+          minLength: 1
+        width:
+          description: External application function dialog width in pixels
+          type: integer
+        height:
+          description: External application function dialog height in pixels
+          type: integer
+        icon:
+          description: This value can point directly to URL holding the icon image.
+            See LeadDesk wiki for more about icon.
+          type: string
+        sandbox:
+          description: Iframe sandbox attributes (separated by space)
+          type: string
+          maxLength: 255
+          enum:
+          - allow-forms
+          - allow-pointer-lock
+          - allow-popups
+          - allow-same-origin
+          - allow-scripts
+          - allow-top-navigation
+      xml:
+        name: CustomAppFunctionInput

@@ -1,0 +1,27 @@
+---
+components:
+  schemas:
+    GdprAgentCall:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        call_recording:
+          type: string
+        phone_number:
+          type: string
+        result:
+          type: string
+        comment:
+          type: string
+        direction:
+          type: string
+          enum:
+          - in
+          - out
+        status:
+          type: string
+        duration:
+          type: string
+      xml:
+        name: GdprAgentCall

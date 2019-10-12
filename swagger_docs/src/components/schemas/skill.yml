@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    Skill:
+      properties:
+        id:
+          description: Skill id
+          type: integer
+        name:
+          description: Skill name
+          type: string
+        description:
+          description: Skill description
+          type: string
+      xml:
+        name: Skill

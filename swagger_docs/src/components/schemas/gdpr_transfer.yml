@@ -1,0 +1,12 @@
+---
+components:
+  schemas:
+    GdprTransfer:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        phone_number:
+          type: string
+      xml:
+        name: GdprTransfer

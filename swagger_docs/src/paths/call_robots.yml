@@ -1,0 +1,112 @@
+---
+paths:
+  "/call_robots":
+    get:
+      tags:
+      - call_robots
+      summary: Fetch call robots
+      description: Fetch call robots
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+      - name: name
+        in: query
+        description: Filter results based on robot name
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CallRobotCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - call_robots
+      summary: Create call robot
+      description: Create call robots
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostCallRobotInput"
+        description: Request body containing new values
+        required: true
+      responses:
+        '200':
+          description: Successful operation. Returns the created call robot id.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/call_robots/{id}":
+    get:
+      tags:
+      - call_robots
+      summary: Fetch a call robot
+      description: Fetch a call robot.
+      operationId: getCallRobotById
+      parameters:
+      - name: id
+        in: path
+        description: CallRobot id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a call robot.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CallRobotObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

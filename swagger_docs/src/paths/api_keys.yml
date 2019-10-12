@@ -1,0 +1,186 @@
+---
+paths:
+  "/api_keys/oauth":
+    get:
+      tags:
+      - api_keys
+      summary: List OAuth clients
+      description: Get a full list of all OAuth clients with basic properties
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - creator_id
+      - name: name
+        in: query
+        description: Filter results based on OAuth client's name
+        required: false
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: 'Sort fields ascending or descending order by using following
+          format: {field}:{order}. Multiple fields can be combined when separated
+          with a comma.'
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - id
+            - secret
+            - name
+            - created_at
+            - creator_id
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/OauthClientCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - api_keys
+      summary: Create OAuth client
+      description: Create a new OAuth client with randomized id and secret
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostApiKeyOAuthInput"
+        description: Request body containing new values
+      responses:
+        '200':
+          description: Successful operation. Returns created oauth client id.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OAuthIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/api_keys/oauth/{id}":
+    get:
+      tags:
+      - api_keys
+      summary: Get OAuth client properties
+      description: Get properties of a single OAuth client
+      parameters:
+      - name: id
+        in: path
+        description: oauth client id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns an OAuth client.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OauthClient"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - api_keys
+      summary: Delete OAuth client
+      description: Delete OAuth client and revoke all access_tokens and refresh_tokens
+        related to it. This operation cannot be reverted.
+      parameters:
+      - name: id
+        in: path
+        description: OAuth client id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - api_keys
+      summary: Modify OAuth client
+      description: Change the properties of an OAuth client
+      parameters:
+      - name: id
+        in: path
+        description: OAuth client id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PatchApiKeyOAuthInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

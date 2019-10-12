@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    UserLoginToken:
+      properties:
+        token:
+          description: Login token JWT
+          type: string
+          example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1MzI5MzA4MTEsInVzZXIiOjEsIm1ldGEiOm51bGx9.JV4R5jLSyT0QFo6DEG37U53U5LUruw-87oMrg8vAJpyxEGrUWrvUu5vbLwz2qIP4xs5gBF0IC0gklCzHTO1cJQ
+        expires:
+          description: Time when login token expires
+          type: string
+          format: date-time
+          example: '2018-07-30T08:00:00+03:00'
+      xml:
+        name: UserLoginToken

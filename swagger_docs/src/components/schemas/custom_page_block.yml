@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    CustomPageBlock:
+      properties:
+        id:
+          description: Custom page block id
+          type: integer
+        name:
+          description: Custom page block name
+          type: string
+        location:
+          description: Location for the custom page
+          type: string
+          enum:
+          - campaign-editor
+        url:
+          description: Custom page block URL
+          type: string
+        sandbox:
+          description: Iframe sandbox attributes (separated by space)
+          type: string
+          enum:
+          - allow-forms
+          - allow-pointer-lock
+          - allow-popups
+          - allow-same-origin
+          - allow-scripts
+          - allow-top-navigation
+        height:
+          description: Custom page block iframe height in pixels
+          type: integer
+      xml:
+        name: CustomPageBlock

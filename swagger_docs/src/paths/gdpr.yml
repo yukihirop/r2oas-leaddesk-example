@@ -1,0 +1,140 @@
+---
+paths:
+  "/gdpr/contact":
+    get:
+      tags:
+      - gdpr
+      summary: Fetch GDPR contact data
+      description: Fetch GDPR contact data. At least one of the search parameters
+        is mandatory. Multiple parameters are joined with the logical OR operator.
+      parameters:
+      - name: phone
+        in: query
+        description: Contact's phone number (international format, must begin with
+          a plus sign)
+        required: false
+        schema:
+          type: string
+      - name: ssc
+        in: query
+        description: Contact's social security code
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Contact's email address
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation returns collections of contact data objects.
+          content:
+            application/json:
+              schema:
+                properties:
+                  contacts:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprContact"
+                  calls:
+                    properties:
+                      agent:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprAgentCall"
+                      robot:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprRobotCall"
+                      queue:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprQueueCall"
+                      transfers:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprTransfer"
+                    type: object
+                  orders:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprOrder"
+                  callbacks:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprCallback"
+                  sms:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprSms"
+                  emails:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprEmail"
+                  phonebook_contacts:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprPhonebookContact"
+                  manuscript_results:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/GdprManuscriptResult"
+                  calendar:
+                    properties:
+                      meetings:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprCalendarMeeting"
+                      orders:
+                        type: array
+                        items:
+                          "$ref": "#/components/schemas/GdprCalendarOrder"
+                    type: object
+                  _links:
+                    "$ref": "#/components/schemas/links"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - gdpr
+      summary: Delete and anonymize GDPR contact data
+      description: 'Delete and anonymize GDPR contact data (NOTE: order data will
+        be preserved). At least one of the search parameters is mandatory. Multiple
+        parameters are joined with the logical OR operator.'
+      parameters:
+      - name: phone
+        in: query
+        description: Contact's phone number (international format, must begin with
+          a plus sign)
+        required: false
+        schema:
+          type: string
+      - name: ssc
+        in: query
+        description: Contact's social security code
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: Contact's email address
+        required: false
+        schema:
+          type: string
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

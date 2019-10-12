@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    contactListIdAndWeight:
+      properties:
+        id:
+          description: Contact list id
+          type: integer
+        weight:
+          description: Contact list weight
+          type: integer
+      xml:
+        name: contactListIdAndWeight

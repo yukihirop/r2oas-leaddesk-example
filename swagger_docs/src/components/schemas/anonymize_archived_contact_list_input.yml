@@ -1,0 +1,68 @@
+---
+components:
+  schemas:
+    AnonymizeArchivedContactListInput:
+      required:
+      - fields
+      properties:
+        fields:
+          description: Fields that should be set to anonymized (set to NULL).
+          type: array
+          items:
+            type: string
+            enum:
+            - phone
+            - email
+            - name
+            - gender
+            - ssc
+            - birth_year
+            - address
+            - postal
+            - city
+            - country
+            - title
+            - company
+            - vatin
+            - www
+            - comment
+            - other1
+            - other2
+            - other3
+            - other4
+            - other5
+            - other6
+            - other7
+            - other8
+            - other9
+            - other10
+            - other11
+            - other12
+            - other13
+            - other14
+            - other15
+            - other16
+            - other17
+            - other18
+            - other19
+            - other20
+            - other21
+            - other22
+            - other23
+            - other24
+            - other25
+            - other26
+            - other27
+            - other28
+            - other29
+            - other30
+            - other31
+            - other32
+            - other33
+            - other34
+            - other35
+          example:
+          - name
+          - phone
+      xml:
+        name: AnonymizeArchivedContactListInput

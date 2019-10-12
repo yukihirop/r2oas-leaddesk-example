@@ -1,0 +1,7 @@
+---
+components:
+  responses:
+    '500':
+      description: Internal Server Error - Something is wrong in LeadDesk infrastructure.
+        Request could not be fulfilled at the moment, but it should be runnable later
+        on when problem is fixed. Check the response JSON object for more details.

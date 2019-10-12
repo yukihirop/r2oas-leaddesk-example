@@ -1,0 +1,28 @@
+---
+components:
+  schemas:
+    optionalSettings:
+      properties:
+        campaign_url_1:
+          properties:
+            url:
+              description: Campaign url 1 URL
+              type: string
+            name:
+              description: Campaign url 1 customized name
+              type: string
+        campaign_url_2:
+          properties:
+            url:
+              description: Campaign url 2 URL
+              type: string
+            name:
+              description: Campaign url 2 customized name
+              type: string
+        external_url:
+          properties:
+            url:
+              description: External url
+              type: string
+      xml:
+        name: optionalSettings

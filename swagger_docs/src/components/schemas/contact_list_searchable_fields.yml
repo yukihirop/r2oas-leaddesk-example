@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    ContactListSearchableFields:
+      properties:
+        name:
+          description: Contact list name
+          type: string
+        office:
+          description: Contact list office
+          type: string
+      xml:
+        name: ContactListSearchableFields

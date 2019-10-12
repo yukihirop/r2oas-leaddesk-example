@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    ProductOptionCollection:
+      properties:
+        id:
+          description: Product option id
+          type: integer
+        name:
+          description: Product option name
+          type: string
+      xml:
+        name: ProductOptionCollection

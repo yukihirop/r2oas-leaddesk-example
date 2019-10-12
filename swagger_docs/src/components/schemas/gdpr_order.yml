@@ -1,0 +1,62 @@
+---
+components:
+  schemas:
+    GdprOrder:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        order_recording:
+          type: string
+        invoicing_details:
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            company:
+              type: string
+            title:
+              type: string
+            address:
+              type: string
+            postal_code:
+              type: string
+            city:
+              type: string
+            country:
+              type: string
+            phone_number:
+              type: string
+            ssc:
+              type: string
+            email:
+              type: string
+          type: object
+        delivery_details:
+          properties:
+            first_name:
+              type: string
+            last_name:
+              type: string
+            company:
+              type: string
+            title:
+              type: string
+            address:
+              type: string
+            postal_code:
+              type: string
+            city:
+              type: string
+            country:
+              type: string
+            phone_number:
+              type: string
+            ssc:
+              type: string
+            email:
+              type: string
+          type: object
+      xml:
+        name: GdprOrder

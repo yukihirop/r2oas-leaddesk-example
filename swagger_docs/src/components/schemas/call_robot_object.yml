@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CallRobotObject:
+      properties:
+        id:
+          description: Robot id
+          type: integer
+        name:
+          description: Robot name
+          type: string
+      xml:
+        name: CallRobotObject

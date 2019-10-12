@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    PatchActivityInput:
+      properties:
+        name:
+          type: string
+          maxLength: 100
+          minLength: 1
+        billable:
+          type: boolean
+        payable:
+          type: boolean
+      xml:
+        name: PatchActivityInput

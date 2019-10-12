@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CallResult:
+      properties:
+        id:
+          description: Result id
+          type: integer
+        name:
+          description: Result name
+          type: string
+      xml:
+        name: CallResult

@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '405':
+      description: Method Not Allowed - Given HTTP method is not allowed with requested
+        resource. e.g. Some resources can't be deleted.

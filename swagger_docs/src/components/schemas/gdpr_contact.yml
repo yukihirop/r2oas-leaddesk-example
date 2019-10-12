@@ -1,0 +1,40 @@
+---
+components:
+  schemas:
+    GdprContact:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        first_name:
+          type: string
+        last_name:
+          type: string
+        gender:
+          type: string
+        company:
+          type: string
+        email:
+          type: string
+        ssc:
+          type: string
+        address:
+          type: string
+        postal_code:
+          type: string
+        country:
+          type: string
+        title:
+          type: string
+        vatin:
+          type: string
+        www:
+          type: string
+        year_of_birth:
+          type: string
+        phone_numbers:
+          type: array
+          items:
+            type: string
+      xml:
+        name: GdprContact

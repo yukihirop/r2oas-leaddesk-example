@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    callMethods:
+      properties:
+        progressive:
+          properties:
+            enabled:
+              description: Is progressive (automatic/semi-automatic) call tab enabled.
+              type: boolean
+            pause_before_call:
+              description: Is pause before call enabled (aka semi-automatic) enabled.
+              type: boolean
+            user_selection:
+              description: Is user selection enabled (user can choose between progressive
+                and pause before call).
+              type: boolean
+        contact_list:
+          properties:
+            enabled:
+              description: Is contact list tab enabled.
+              type: boolean
+        b2b:
+          properties:
+            enabled:
+              description: Is B2B tab enabled.
+              type: boolean
+        manual:
+          properties:
+            enabled:
+              description: Is manual call tab enabled.
+              type: boolean
+      xml:
+        name: callMethods

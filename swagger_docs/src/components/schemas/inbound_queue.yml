@@ -1,0 +1,25 @@
+---
+components:
+  schemas:
+    InboundQueue:
+      properties:
+        id:
+          description: Inbound queue id
+          type: integer
+        name:
+          description: Inbound queue name
+          type: string
+        number:
+          description: Inbound queue phone number
+          type: string
+        extension:
+          description: Inbound queue VoIP extension name
+          type: string
+        campaign_id:
+          description: Campaign id queue is attached to
+          type: integer
+        enabled:
+          description: Is inbound queue in use
+          type: boolean
+      xml:
+        name: InboundQueue

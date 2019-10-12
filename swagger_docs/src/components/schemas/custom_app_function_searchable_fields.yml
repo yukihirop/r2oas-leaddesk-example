@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    CustomAppFunctionSearchableFields:
+      properties:
+        location:
+          description: Custom page location
+          type: string
+      xml:
+        name: CustomAppFunctionSearchableFields

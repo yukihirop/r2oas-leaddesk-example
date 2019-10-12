@@ -1,0 +1,40 @@
+---
+components:
+  schemas:
+    CustomPageBlocksInput:
+      required:
+      - name
+      - location
+      - url
+      properties:
+        name:
+          description: Custom page block name
+          type: string
+          maxLength: 255
+          minLength: 1
+        location:
+          description: Location for the custom page block in LeadDesk
+          type: string
+          enum:
+          - campaign-editor
+        url:
+          description: Custom page block endpoint URL
+          type: string
+          maxLength: 2048
+          minLength: 1
+        sandbox:
+          description: Iframe sandbox attributes (separated by space)
+          type: string
+          maxLength: 255
+          enum:
+          - allow-forms
+          - allow-pointer-lock
+          - allow-popups
+          - allow-same-origin
+          - allow-scripts
+          - allow-top-navigation
+        height:
+          description: Custom page block iframe height in pixels
+          type: integer
+      xml:
+        name: CustomPageBlocksInput

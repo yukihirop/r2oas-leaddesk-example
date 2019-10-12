@@ -1,0 +1,5 @@
+---
+components:
+  responses:
+    '204':
+      description: Request was fulfilled but there's no content to be sent back.

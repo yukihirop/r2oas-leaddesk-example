@@ -1,0 +1,12 @@
+---
+components:
+  schemas:
+    PostCustomAppFunctionInput:
+      required:
+      - name
+      - location
+      - url
+      xml:
+        name: PostCustomAppFunctionInput
+      allOf:
+      - "$ref": "#/components/schemas/CustomAppFunctionInput"

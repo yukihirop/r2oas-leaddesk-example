@@ -1,0 +1,13 @@
+---
+components:
+  parameters:
+    per_page:
+      name: per_page
+      in: query
+      description: Amount of items per page
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 500
+        default: 25

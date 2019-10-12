@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    Callback:
+      properties:
+        id:
+          description: Callback id
+          type: integer
+      xml:
+        name: Callback

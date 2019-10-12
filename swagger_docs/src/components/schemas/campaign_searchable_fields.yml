@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CampaignSearchableFields:
+      properties:
+        name:
+          description: Campaign name
+          type: string
+        office:
+          description: Campaign office
+          type: string
+      xml:
+        name: CampaignSearchableFields

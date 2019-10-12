@@ -1,0 +1,40 @@
+---
+components:
+  schemas:
+    ArchivedContactList:
+      properties:
+        id:
+          description: Contact list id
+          type: integer
+        name:
+          description: Contact list name
+          type: string
+        legend:
+          description: Contact list description
+          type: string
+        group:
+          description: Contact list group name
+          type: string
+        office:
+          description: Contact list office
+          type: string
+        sponsor:
+          description: Contact list sponsor name
+          type: string
+        created_at:
+          description: Contact list creation date
+          type: string
+          format: date-time
+          example: '2018-04-25T13:50:58+00:00'
+        updated_at:
+          description: Contact list last updated date
+          type: string
+          format: date-time
+          example: '2018-04-25T13:50:58+00:00'
+        expiry_date:
+          description: Contact list expiration date
+          type: string
+          format: date-time
+          example: '2018-04-25T00:00:00+00:00'
+      xml:
+        name: ArchivedContactList

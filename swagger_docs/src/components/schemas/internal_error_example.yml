@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    InternalErrorExample:
+      properties:
+        error:
+          description: Logical key of an error
+          type: string
+          example: internal_error
+        error_description:
+          description: Human readable description of an error
+          type: string
+          example: 'Internal error occured. Code: 35f2f35811352146fdc5eb57afc00d71'
+      xml:
+        name: InternalErrorExample

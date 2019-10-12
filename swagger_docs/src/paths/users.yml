@@ -1,0 +1,263 @@
+---
+paths:
+  "/users":
+    get:
+      tags:
+      - users
+      summary: Fetch list of users
+      description: Fetch list of users
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - username
+            - office
+      - name: name
+        in: query
+        description: Filter results based on user name
+        required: false
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Filter results based on user username
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on user office
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/UserCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/users/skills":
+    get:
+      tags:
+      - users
+      summary: Fetch list of users. Returns basic info and inbound skills.
+      description: Fetch list of users. Returns basic info and inbound skills.
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - username
+            - office
+      - name: name
+        in: query
+        description: Filter results based on user name
+        required: false
+        schema:
+          type: string
+      - name: username
+        in: query
+        description: Filter results based on user username
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on user office
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/UserCollectionSkills"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/users/{id}":
+    get:
+      tags:
+      - users
+      summary: Fetch user info
+      description: Fetch user info
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/User"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/users/{id}/login_token":
+    get:
+      tags:
+      - users
+      summary: Get login token for user
+      description: Creates a short lived login token. Login token can be used to login
+        into LeadDesk UI. This is done by sending the received token value as a `login-token`
+        POST parameter into LeadDesk login page. Login token can only be created for
+        active users.
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+      - name: meta
+        in: query
+        description: Additional free text meta information that will be bound to the
+          login token and which will be logged if the login-token is actually used
+          to login into LeadDesk. Meta value has no functional purpose.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/UserLoginToken"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/users/{id}/skills":
+    get:
+      tags:
+      - users
+      summary: Fetch user inbound skills
+      description: Fetch user inbound skills
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation return array of user skills
+          content:
+            application/json:
+              schema:
+                property: collection
+                type: array
+                items:
+                  "$ref": "#/components/schemas/SkillWithPoints"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - users
+      summary: Change user's inbound skills
+      description: Change user's inbound skills. Skill items given in array will replace
+        user's current skills.
+      parameters:
+      - name: id
+        in: path
+        description: User id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              property: skills
+              type: array
+              items:
+                "$ref": "#/components/schemas/SkillInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

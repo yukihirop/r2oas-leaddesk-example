@@ -1,0 +1,9 @@
+---
+components:
+  schemas:
+    contactSettingValues:
+      properties:
+        value:
+          type: string
+      xml:
+        name: contactSettingValues

@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CampaignSetting:
+      properties:
+        name:
+          description: Campaign setting name
+          type: string
+        value:
+          description: Campaign setting value
+          type: string
+      xml:
+        name: CampaignSetting

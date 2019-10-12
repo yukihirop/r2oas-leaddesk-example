@@ -1,0 +1,22 @@
+---
+components:
+  schemas:
+    PostActivityInput:
+      required:
+      - name
+      - billable
+      - payable
+      properties:
+        name:
+          description: Activity name
+          type: string
+          maxLength: 100
+          minLength: 1
+        billable:
+          description: Is activity billable
+          type: boolean
+        payable:
+          description: Is activity payable
+          type: boolean
+      xml:
+        name: PostActivityInput

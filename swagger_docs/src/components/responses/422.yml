@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '422':
+      description: Unprocessable Entity - Request included parameter values that are
+        not valid or are erroneous.

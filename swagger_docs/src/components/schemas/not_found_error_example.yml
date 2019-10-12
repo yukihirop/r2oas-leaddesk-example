@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    NotFoundErrorExample:
+      properties:
+        error:
+          description: Logical key of an error
+          type: string
+          example: not_found
+        error_description:
+          description: Human readable description of an error
+          type: string
+          example: Resource could not be found
+      xml:
+        name: NotFoundErrorExample

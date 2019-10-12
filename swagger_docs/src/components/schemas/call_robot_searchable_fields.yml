@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    CallRobotSearchableFields:
+      properties:
+        name:
+          description: Call robot name
+          type: string
+      xml:
+        name: CallRobotSearchableFields

@@ -11,3 +11,5 @@
 /log/*
 !/log/.keep
 /tmp
+
+/swagger_docs/swagger_doc.yml

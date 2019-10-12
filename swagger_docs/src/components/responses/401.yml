@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '401':
+      description: Unauthorized - Error which is caused mainly by invalid authentication.
+        Authorization token could be expired or invalid.

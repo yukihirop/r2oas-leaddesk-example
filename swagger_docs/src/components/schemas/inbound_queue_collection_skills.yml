@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    InboundQueueCollectionSkills:
+      xml:
+        name: InboundQueueCollectionSkills
+      allOf:
+      - "$ref": "#/components/schemas/InboundQueueCollection"
+      - properties:
+          skills:
+            description: Collection of queue's inbound skills
+            type: array
+            items:
+              "$ref": "#/components/schemas/Skill"
+        type: object

@@ -1,0 +1,11 @@
+---
+components:
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Since OpenAPI specification v2.0 does not support Bearer authentication
+        this is just a placeholder. Access token should be passed in Authorization
+        header as 'Bearer {access-token}'. Therefore the 'try it' functionality does
+        not yet work in Swagger UI either.
+      name: Authorization
+      in: header

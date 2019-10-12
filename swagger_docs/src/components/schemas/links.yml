@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    links:
+      properties:
+        self:
+          type: string
+        prev:
+          type: string
+        next:
+          type: string
+      xml:
+        name: links

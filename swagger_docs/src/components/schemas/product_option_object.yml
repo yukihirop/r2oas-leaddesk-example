@@ -1,0 +1,17 @@
+---
+components:
+  schemas:
+    ProductOptionObject:
+      properties:
+        id:
+          description: Product option id
+          type: integer
+        name:
+          description: Product option name
+          type: string
+        _links:
+          properties:
+            self:
+              type: string
+      xml:
+        name: ProductOptionObject

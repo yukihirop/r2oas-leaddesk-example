@@ -1,0 +1,12 @@
+---
+components:
+  schemas:
+    PostCallResultInput:
+      required:
+      - id
+      properties:
+        id:
+          description: Result id
+          type: integer
+      xml:
+        name: PostCallResultInput

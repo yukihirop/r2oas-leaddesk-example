@@ -1,0 +1,28 @@
+---
+components:
+  schemas:
+    OAuthLeadDeskClientGrantRequest:
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      - leaddesk_client_id
+      properties:
+        grant_type:
+          description: Must be 'leaddesk_client_id' for leaddesk client grant.
+          type: string
+          example: leaddesk_client_id
+        client_id:
+          description: Your rest API username/client_id.
+          type: string
+          example: api.username.examples
+        client_secret:
+          description: Your rest API password/secret.
+          type: string
+          example: 69RqIxU1iUaYXf2QPKD4l2PGxQjqfCqQL2dSD9ZW
+        leaddesk_client_id:
+          description: LeadDesk customer/client id
+          type: integer
+          example: 134
+      xml:
+        name: OAuthLeadDeskClientGrantRequest

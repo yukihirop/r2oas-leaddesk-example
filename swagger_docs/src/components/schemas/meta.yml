@@ -1,0 +1,9 @@
+---
+components:
+  schemas:
+    meta:
+      properties:
+        total:
+          type: integer
+      xml:
+        name: meta

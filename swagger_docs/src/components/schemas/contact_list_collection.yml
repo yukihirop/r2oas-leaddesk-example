@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    ContactListCollection:
+      properties:
+        id:
+          description: Contact list id
+          type: integer
+        name:
+          description: Contact list name
+          type: string
+        legend:
+          description: Contact list description
+          type: string
+        group:
+          description: Contact list group name
+          type: string
+        office:
+          description: Contact list office
+          type: string
+        sponsor:
+          description: Contact list sponsor name
+          type: string
+        created_at:
+          description: Contact list creation date
+          type: string
+        updated_at:
+          description: Contact list last updated date
+          type: string
+        expiry_date:
+          description: Contact list expiration date
+          type: string
+      xml:
+        name: ContactListCollection

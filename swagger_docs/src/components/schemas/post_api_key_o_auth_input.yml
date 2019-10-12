@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    PostApiKeyOAuthInput:
+      required:
+      - name
+      properties:
+        name:
+          description: OAuth client's name
+          type: string
+          maxLength: 255
+          minLength: 1
+          example: My first OAuth client
+      xml:
+        name: PostApiKeyOAuthInput

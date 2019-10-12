@@ -1,0 +1,287 @@
+---
+paths:
+  "/product_groups":
+    get:
+      tags:
+      - product_groups
+      summary: Fetch product groups
+      description: Fetch product groups
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - office
+      - name: name
+        in: query
+        description: Filter results based on product group name
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on product group office
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ProductGroupCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - product_groups
+      summary: Create a new product group
+      description: Create a new product group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostProductGroup"
+        description: Request body containing new values.
+      responses:
+        '200':
+          description: Successful operation. Returns newly created product group id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/product_groups/{id}":
+    get:
+      tags:
+      - product_groups
+      summary: Fetch a product group
+      description: Fetch a product group.
+      operationId: getProductGroupById
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a product group.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ProductGroup"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - product_groups
+      summary: Delete a product group
+      description: Delete a product group
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - product_groups
+      summary: Modify an existing product group
+      description: Modify an existing product group
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PatchProductGroup"
+        description: Request body containing new values. Overrides product group properties
+          and entire sub-resources with given values.
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/product_groups/{id}/products":
+    post:
+      tags:
+      - product_groups
+      summary: Add products to a product group
+      description: Add products to a product group
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - product_groups
+      summary: Remove all products from product group
+      description: Remove all products from product group
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - product_groups
+      summary: Override product group products with new products
+      description: Override product group products with new products
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/product_groups/{id}/products/{product_id}":
+    delete:
+      tags:
+      - product_groups
+      summary: Remove a product from product group
+      description: Remove a product from product group
+      parameters:
+      - name: id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      - name: product_id
+        in: query
+        description: Product id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

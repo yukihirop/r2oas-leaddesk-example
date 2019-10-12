@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    ProductOptionSearchableFields:
+      properties:
+        name:
+          description: Product option name
+          type: string
+      xml:
+        name: ProductOptionSearchableFields

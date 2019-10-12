@@ -1,0 +1,95 @@
+---
+components:
+  schemas:
+    CampaignObject:
+      properties:
+        id:
+          description: Campaign id
+          type: integer
+        name:
+          description: Campaign name
+          type: string
+        desc:
+          description: Campaign description
+          type: string
+        office:
+          description: Campaign office
+          type: string
+        created_at:
+          description: Campaign creation date
+          type: string
+        updated_at:
+          description: Campaign last updated date
+          type: string
+        disabled:
+          description: Is campaign disabled. NOTE! Users cannot be attached to disabled
+            campaign. If campaign is disabled current users are detached
+          type: boolean
+        sponsor:
+          description: Sponsor name
+          type: string
+        contactmanager_id:
+          description: Contact manager id (user id)
+          type: integer
+        call_methods:
+          properties:
+            progressive:
+              properties:
+                enabled:
+                  description: Is progressive (automatic/semi-automatic) call tab
+                    enabled.
+                  type: boolean
+                pause_before_call:
+                  description: Is pause before call enabled (aka semi-automatic) enabled.
+                  type: boolean
+                user_selection:
+                  description: Is user selection enabled (user can choose between
+                    progressive and pause before call).
+                  type: boolean
+            contact_list:
+              properties:
+                enabled:
+                  description: Is contact list tab enabled.
+                  type: boolean
+            b2b:
+              properties:
+                enabled:
+                  description: Is B2B tab enabled.
+                  type: boolean
+            manual:
+              properties:
+                enabled:
+                  description: Is manual call tab enabled.
+                  type: boolean
+        optional_settings:
+          "$ref": "#/components/schemas/optionalSettings"
+        contact_settings:
+          properties:
+            fields:
+              type: array
+              items:
+                "$ref": "#/components/schemas/contactSettings"
+        products:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        product_groups:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        users:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        contact_lists:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contactListIdAndWeight"
+        _links:
+          properties:
+            self:
+              type: string
+            custom_fields:
+              type: string
+      xml:
+        name: CampaignObject

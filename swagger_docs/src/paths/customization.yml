@@ -1,0 +1,492 @@
+---
+paths:
+  "/customization/app_functions":
+    get:
+      tags:
+      - customization
+      summary: Fetch list of all external application function
+      description: Fetch list of all external application functions.
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - location
+      - name: location
+        in: query
+        description: Filter results based on external application location in LeadDesk
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation. Returns an array of external application
+            functions.
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CustomAppFunction"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - customization
+      summary: Create a new external application function
+      description: Create a new external application function
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostCustomAppFunctionInput"
+        description: Request body containing new values
+      responses:
+        '200':
+          description: Successful operation. Returns the created external application
+            function id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/customization/app_functions/{id}":
+    get:
+      tags:
+      - customization
+      summary: Fetch an external application function
+      description: Fetch an external application function
+      operationId: getCustomAppFunctionById
+      parameters:
+      - name: id
+        in: path
+        description: External application function id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns external application function.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomAppFunctionObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - customization
+      summary: Delete an external application function
+      description: Delete an external application function
+      parameters:
+      - name: id
+        in: path
+        description: External application function id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - customization
+      summary: Modify an existing external application function
+      description: Modify an existing external application function
+      parameters:
+      - name: id
+        in: path
+        description: App function id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CustomAppFunctionInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/customization/page_blocks":
+    get:
+      tags:
+      - customization
+      summary: Fetch customized page blocks
+      description: Fetch customized page blocks
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - location
+      - name: location
+        in: query
+        description: Filter results based on custom page block location
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation. Returns an array of customized page blocks.
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CustomPageBlock"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - customization
+      summary: Create a new customized page block
+      description: Create a new customized page block
+      requestBody:
+        "$ref": "#/components/requestBodies/CustomPageBlocksInput"
+      responses:
+        '200':
+          description: Successful operation. Returns the created custom page block
+            id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/customization/page_blocks/{id}":
+    get:
+      tags:
+      - customization
+      summary: Fetch a custom page block
+      description: Fetch a custom page block
+      operationId: getCustomPageBlockById
+      parameters:
+      - name: id
+        in: path
+        description: Custom page block id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation returns page block object.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomPageBlockObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - customization
+      summary: Delete a custom page block
+      description: Delete a custom page block
+      parameters:
+      - name: id
+        in: path
+        description: Custom page block id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - customization
+      summary: Modify an existing custom page block
+      description: Modify an existing custom page block
+      parameters:
+      - name: id
+        in: path
+        description: Custom page block id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/CustomPageBlocksInput"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/customization/pages":
+    get:
+      tags:
+      - customization
+      summary: Fetch customized pages
+      description: Fetch customized pages
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - location
+      - name: location
+        in: query
+        description: Filter results based on custom page location
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation returns an array of customized pages.
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CustomPage"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - customization
+      summary: Create a new customized page
+      description: Create a new customized page
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostCustomPageInput"
+        description: Request body containing new values
+      responses:
+        '200':
+          description: Successful operation. Returns the created custom page id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/customization/pages/{id}":
+    get:
+      tags:
+      - customization
+      summary: Fetch a custom page
+      description: Fetch a custom page
+      operationId: getCustomPageById
+      parameters:
+      - name: id
+        in: path
+        description: Custom page id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns customized page settings.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CustomPageObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - customization
+      summary: Delete a custom page
+      description: Delete a custom page
+      parameters:
+      - name: id
+        in: path
+        description: Custom page id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - customization
+      summary: Modify an existing custom page
+      description: Modify an existing custom page
+      parameters:
+      - name: id
+        in: path
+        description: Custom page id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/CustomPageInput"
+        description: Request body containing new values
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

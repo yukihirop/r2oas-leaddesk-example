@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    ProductObject:
+      properties:
+        id:
+          description: Product id
+          type: integer
+        name:
+          description: Product name
+          type: string
+        description:
+          description: Product description
+          type: string
+        product_code:
+          description: Product code
+          type: string
+        office:
+          description: Product office
+          type: string
+        created_at:
+          description: Product creation date
+          type: string
+        updated_at:
+          description: Product last updated date
+          type: string
+        _links:
+          properties:
+            self:
+              type: string
+            custom_fields:
+              type: string
+      xml:
+        name: ProductObject

@@ -1,0 +1,31 @@
+---
+paths:
+  "/callbacks/{id}":
+    delete:
+      tags:
+      - callbacks
+      summary: Delete a callback
+      description: Delete a callback
+      parameters:
+      - name: id
+        in: path
+        description: Callback id
+        required: true
+        schema:
+          type: integer
+      - name: restore_contact
+        in: query
+        description: Restores contact to not called state if true
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

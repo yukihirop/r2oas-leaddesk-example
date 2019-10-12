@@ -1,0 +1,174 @@
+---
+paths:
+  "/inbound/queues":
+    get:
+      tags:
+      - inbound
+      summary: Fetch list of all inbound phone call queues
+      description: Fetch list of all inbound phone call queues
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - number
+      - name: name
+        in: query
+        description: Filter results based on queue name
+        required: false
+        schema:
+          type: string
+      - name: number
+        in: query
+        description: Filter results based on queue phone number
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/InboundQueueCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/inbound/queues/skills":
+    get:
+      tags:
+      - inbound
+      summary: Fetch list of all inbound phone call queues with inbound skills included
+      description: Fetch list of all inbound phone call queues with inbound skills
+        included
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - number
+      - name: name
+        in: query
+        description: Filter results based on queue name
+        required: false
+        schema:
+          type: string
+      - name: number
+        in: query
+        description: Filter results based on queue phone number
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/InboundQueueCollectionSkills"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/inbound/queues/{id}":
+    get:
+      tags:
+      - inbound
+      summary: Fetch inbound phone call queue info
+      description: Fetch inbound phone call queue info by given id
+      parameters:
+      - name: id
+        in: path
+        description: Queue id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/InboundQueue"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/inbound/queues/{id}/skills":
+    get:
+      tags:
+      - inbound
+      summary: Fetch inbound phone call queue skills
+      description: Fetch inbound phone call queue skills
+      parameters:
+      - name: id
+        in: path
+        description: Queue id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                property: collection
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Skill"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"

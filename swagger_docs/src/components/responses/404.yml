@@ -1,0 +1,8 @@
+---
+components:
+  responses:
+    '404':
+      description: Not Found - When requested resource is not available, then not
+        found error is usually returned. This can also happen if resource exists,
+        but you don't have visibility to it (e.g. teamleader attempting to modify
+        campaign from different office).

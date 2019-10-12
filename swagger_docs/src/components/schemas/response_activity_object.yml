@@ -1,0 +1,9 @@
+---
+components:
+  schemas:
+    ResponseActivityObject:
+      xml:
+        name: ResponseActivityObject
+      allOf:
+      - "$ref": "#/components/schemas/Activity"
+      - "$ref": "#/components/schemas/linksObjects"

@@ -1,0 +1,11 @@
+---
+components:
+  parameters:
+    search:
+      name: search
+      in: query
+      description: Search term used to filter collection results. Searches through
+        all the searchable fields in the resource.
+      required: false
+      schema:
+        type: string

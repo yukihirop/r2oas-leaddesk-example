@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    CustomPageObject:
+      xml:
+        name: CustomPageObject
+      allOf:
+      - "$ref": "#/components/schemas/CustomPage"
+      - properties:
+          _links:
+            items:
+              "$ref": "#/components/schemas/linksObjects"
+        type: object

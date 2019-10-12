@@ -1,0 +1,28 @@
+---
+components:
+  schemas:
+    OAuthRefreshGrantRequest:
+      required:
+      - grant_type
+      - client_id
+      - client_secret
+      - refresh_token
+      properties:
+        grant_type:
+          description: Must be 'refresh_token' for refresh grant.
+          type: string
+          example: refresh_token
+        client_id:
+          description: Your rest API username/client_id.
+          type: string
+          example: api.username.examples
+        client_secret:
+          description: Your rest API password/secret.
+          type: string
+          example: 69RqIxU1iUaYXf2QPKD4l2PGxQjqfCqQL2dSD9ZW
+        refresh_token:
+          description: Refresh token received during previous authentication process.
+          type: string
+          example: OCqak57Um37Hacuw9vwbufnCWiRgqhiuUwKN4k9S
+      xml:
+        name: OAuthRefreshGrantRequest

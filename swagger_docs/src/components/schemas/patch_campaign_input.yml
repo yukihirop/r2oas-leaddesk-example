@@ -1,0 +1,54 @@
+---
+components:
+  schemas:
+    PatchCampaignInput:
+      required:
+      - name
+      properties:
+        name:
+          description: Campaign name
+          type: string
+          maxLength: 255
+          minLength: 1
+        desc:
+          description: Campaign description
+          type: string
+        office:
+          description: Campaign office name
+          type: string
+          maxLength: 100
+        disabled:
+          description: Is campaign disabled. NOTE! Users cannot be attached to disabled
+            campaign. If campaign is disabled current users are detached
+          type: boolean
+        sponsor:
+          description: Sponsor name
+          type: string
+          maxLength: 100
+        contactmanager_id:
+          description: Contact manager id (user id)
+          type: integer
+        call_methods:
+          "$ref": "#/components/schemas/callMethods"
+        optional_settings:
+          "$ref": "#/components/schemas/optionalSettings"
+        contact_settings:
+          "$ref": "#/components/schemas/contactSettings"
+        products:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        product_groups:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        users:
+          type: array
+          items:
+            "$ref": "#/components/schemas/genericIdObject"
+        contact_lists:
+          type: array
+          items:
+            "$ref": "#/components/schemas/contactListIdAndWeight"
+      xml:
+        name: PatchCampaignInput

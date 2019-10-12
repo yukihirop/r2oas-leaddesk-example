@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    CustomPageBlocksSearchableFields:
+      properties:
+        location:
+          description: Custom page block location
+          type: string
+      xml:
+        name: CustomPageBlocksSearchableFields

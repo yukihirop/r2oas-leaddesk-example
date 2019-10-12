@@ -1,0 +1,9 @@
+---
+components:
+  schemas:
+    linksObjects:
+      properties:
+        self:
+          type: string
+      xml:
+        name: linksObjects

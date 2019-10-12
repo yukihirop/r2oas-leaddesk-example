@@ -1,0 +1,27 @@
+---
+components:
+  schemas:
+    OAuthAccessTokenResponse:
+      properties:
+        access_token:
+          description: Access token that is used to make authorized requests to API
+            resources.
+          type: string
+          example: CHGK3f04In4Zn6Kp6rfsUZlrJJCzXJH5wSAqAY2j
+        token_type:
+          description: Token type enumeration. At the moment can only be 'Bearer'.
+          type: string
+          example: Bearer
+        expires_in:
+          description: How many seconds the access token is valid. After expiry you
+            can refresh to get a new access token. See Refresh Grant for more info.
+          type: int
+          example: 3600
+        refresh_token:
+          description: Refresh token that can be used to get new access code with
+            same permissions while invalidating the current access_token. See Refresh
+            Grant for more info.
+          type: string
+          example: 9ufdtxPDrkpGywUB4Wm6Rot8rejfQAwXkQCgB4v0
+      xml:
+        name: OAuthAccessTokenResponse

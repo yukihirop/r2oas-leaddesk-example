@@ -1,0 +1,14 @@
+---
+components:
+  schemas:
+    UnarchiveArchivedContactListInput:
+      required:
+      - expiry_date
+      properties:
+        expiry_date:
+          description: New expiry date for the contact list
+          type: string
+          format: date
+          example: '2018-04-25'
+      xml:
+        name: UnarchiveArchivedContactListInput

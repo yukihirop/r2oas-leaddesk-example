@@ -1,0 +1,9 @@
+---
+components:
+  schemas:
+    genericIdObject:
+      properties:
+        id:
+          type: integer
+      xml:
+        name: genericIdObject

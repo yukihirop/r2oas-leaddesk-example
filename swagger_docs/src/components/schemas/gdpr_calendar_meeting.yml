@@ -1,0 +1,22 @@
+---
+components:
+  schemas:
+    GdprCalendarMeeting:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        meeting_title:
+          type: string
+        attendee_emails:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        comment:
+          type: string
+        sms_reminder_phone_number:
+          type: string
+      xml:
+        name: GdprCalendarMeeting

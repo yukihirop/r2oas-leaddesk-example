@@ -1,0 +1,14 @@
+---
+components:
+  schemas:
+    SkillWithPoints:
+      xml:
+        name: SkillWithPoints
+      allOf:
+      - "$ref": "#/components/schemas/Skill"
+      - properties:
+          points:
+            description: Users points for current skill. This is only visible when
+              skill is loaded through relation
+            type: integer
+        type: object

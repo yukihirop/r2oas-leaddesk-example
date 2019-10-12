@@ -1,0 +1,29 @@
+---
+components:
+  schemas:
+    GdprEmail:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        from:
+          type: string
+        to:
+          type: string
+        cc:
+          type: string
+        subject:
+          type: string
+        content:
+          type: string
+        comment:
+          type: string
+        direction:
+          type: string
+          enum:
+          - in
+          - out
+        result:
+          type: string
+      xml:
+        name: GdprEmail

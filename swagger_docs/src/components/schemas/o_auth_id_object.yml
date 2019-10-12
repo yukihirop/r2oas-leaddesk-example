@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    OAuthIdObject:
+      properties:
+        id:
+          type: integer
+          example: PCEmnxLXNdUzc46kANjhPzv7BEj56zXB2AwB5qFW
+      xml:
+        name: OAuthIdObject

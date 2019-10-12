@@ -1,0 +1,43 @@
+---
+components:
+  schemas:
+    CustomAppFunction:
+      properties:
+        id:
+          description: Custom application function id
+          type: integer
+        name:
+          description: Custom application function name
+          type: string
+        location:
+          description: Location for the application function
+          type: string
+          enum:
+          - admin.contact-lists.toolbar
+          - admin.campaign-list.toolbar
+        url:
+          description: URL pointing to custom application endpoint
+          type: string
+        width:
+          description: Custom application function dialog width in pixels
+          type: integer
+        height:
+          description: Custom application function dialog height in pixels
+          type: integer
+        icon:
+          description: 'This value can point directly to URL holding the icon image.
+            Other option is to create JSON {''url'': '''', ''icon'':''glyphicon'',
+            ''iconColor'':''''}'
+          type: string
+        sandbox:
+          description: Iframe sandbox attributes (separated by space)
+          type: string
+          enum:
+          - allow-forms
+          - allow-pointer-lock
+          - allow-popups
+          - allow-same-origin
+          - allow-scripts
+          - allow-top-navigation
+      xml:
+        name: CustomAppFunction

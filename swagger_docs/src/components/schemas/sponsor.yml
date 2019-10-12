@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    Sponsor:
+      properties:
+        id:
+          description: Sponsor id
+          type: integer
+        name:
+          description: Sponsor name
+          type: string
+      xml:
+        name: Sponsor

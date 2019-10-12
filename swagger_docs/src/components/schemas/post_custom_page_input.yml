@@ -1,0 +1,12 @@
+---
+components:
+  schemas:
+    PostCustomPageInput:
+      required:
+      - name
+      - location
+      - url
+      xml:
+        name: PostCustomPageInput
+      allOf:
+      - "$ref": "#/components/schemas/CustomPageInput"

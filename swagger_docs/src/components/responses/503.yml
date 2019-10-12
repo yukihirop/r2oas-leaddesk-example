@@ -1,0 +1,6 @@
+---
+components:
+  responses:
+    '503':
+      description: Service Unavailable - Error that will be reported when API has
+        been completely or partially been disabled.

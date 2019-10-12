@@ -1,0 +1,27 @@
+---
+components:
+  schemas:
+    PatchProductInput:
+      required:
+      - name
+      properties:
+        name:
+          description: Product name
+          type: string
+          maxLength: 100
+          minLength: 1
+        description:
+          description: Product description
+          type: string
+        product_code:
+          description: Product code
+          type: string
+          maxLength: 100
+          minLength: 1
+        office:
+          description: Product office
+          type: string
+          maxLength: 100
+          minLength: 1
+      xml:
+        name: PatchProductInput

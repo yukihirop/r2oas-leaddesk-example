@@ -1,0 +1,14 @@
+---
+components:
+  schemas:
+    GdprQueueCall:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        caller_phone_number:
+          type: string
+        queue_phone_number:
+          type: string
+      xml:
+        name: GdprQueueCall

@@ -1,0 +1,28 @@
+---
+components:
+  schemas:
+    OauthClientCollection:
+      properties:
+        id:
+          description: OAuth client id
+          type: string
+          example: PCEmnxLXNdUzc46kANjhPzv7BEj56zXB2AwB5qFW
+        secret:
+          description: OAuth client secret
+          type: string
+          example: Sh5AfhRHQBO4NNIlLVtHIP8CTftJybtj5U5cOANX
+        name:
+          description: Name of the OAuth client
+          type: string
+          example: My first OAuth client
+        created_at:
+          description: Time when the OAuth client was created
+          type: datetime
+          example: '2019-03-18T12:06:17+02:00'
+        creator_id:
+          description: Original creator of the OAuth client. Null if user was not
+            identifiable.
+          type: integer
+          example: 11356698937127
+      xml:
+        name: OauthClientCollection

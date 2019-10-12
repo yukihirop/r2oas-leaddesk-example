@@ -1,0 +1,16 @@
+---
+components:
+  schemas:
+    ProductGroupCollection:
+      properties:
+        id:
+          description: Product group id
+          type: integer
+        name:
+          description: Product group name
+          type: string
+        office:
+          description: Product group office
+          type: string
+      xml:
+        name: ProductGroupCollection

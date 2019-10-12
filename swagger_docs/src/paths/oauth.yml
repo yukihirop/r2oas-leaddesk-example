@@ -1,0 +1,131 @@
+---
+paths:
+  "/oauth/access-token#client":
+    post:
+      tags:
+      - oauth
+      summary: Authenticate with LeadDesk client (LeadDesk Client Grant)
+      description: Authenticate to Rest API with a preconfigured access to certain
+        LeadDesk client. This authentication method is only available if it has been
+        enabled for your rest API client_id. If authentication is successfull then
+        you can use the received access token to authorize further requests to the
+        other rest API resources e.g. /users. Please ignore the fragment part in the
+        path. It was added only because Open API specification does not allow duplicate
+        paths.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OAuthLeadDeskClientGrantRequest"
+        description: Authentication
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OAuthAccessTokenResponse"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+      security: []
+  "/oauth/access-token#password":
+    post:
+      tags:
+      - oauth
+      summary: Authenticate with LeadDesk user credentials (Password Grant)
+      description: Authenticate to Rest API client with permissions of a LeadDesk
+        user. All rest API users/clients can use this authentication method to access
+        the API. If authentication is successfull then you can use the received access
+        token to authorize further requests to the other rest API resources e.g. /users.
+        Please ignore the fragment part in the path. It was added only because Open
+        API specification does not allow duplicate paths.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OAuthPasswordGrantRequest"
+        description: Authentication
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OAuthAccessTokenResponse"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+      security: []
+  "/oauth/access-token#refresh":
+    post:
+      tags:
+      - oauth
+      summary: Refresh access token (Refresh Grant)
+      description: If access token is expired or you need to otherwise invalidate
+        current access token then use refresh token request. You will get a new access
+        token and invalidate the existing one. New access token can be used the same
+        way as before. Please ignore the fragment part in the path. It was added only
+        because Open API specification does not allow duplicate paths.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OAuthRefreshGrantRequest"
+        description: Authentication
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OAuthAccessTokenResponse"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+      security: []
+  "/oauth/access-token#user":
+    post:
+      tags:
+      - oauth
+      summary: Authenticate with LeadDesk user (LeadDesk User Grant)
+      description: Authenticate to Rest API with a preconfigured access to certain
+        LeadDesk client's users. This authentication method is only available if it
+        has been enabled for your rest API client_id. If authentication is successfull
+        then you can use the received access token to authorize further requests to
+        the other rest API resources e.g. /users. Please ignore the fragment part
+        in the path. It was added only because Open API specification does not allow
+        duplicate paths.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/OAuthLeadDeskUserGrantRequest"
+        description: Authentication
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/OAuthAccessTokenResponse"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+      security: []

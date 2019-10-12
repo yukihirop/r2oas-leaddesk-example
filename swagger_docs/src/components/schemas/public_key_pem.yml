@@ -1,0 +1,34 @@
+---
+components:
+  schemas:
+    PublicKeyPem:
+      properties:
+        kid:
+          description: key id
+          type: integer
+          example: 1
+        kty:
+          description: Key type
+          type: string
+          enum:
+          - RSA
+          example: RSA
+        use:
+          description: Key usage
+          type: string
+          enum:
+          - sig
+          example: sig
+        alg:
+          description: Key algorithm
+          type: string
+          enum:
+          - RS256
+          example: RS256
+        key:
+          description: Public key in PEM format
+          type: string
+          example: "-----BEGIN PUBLIC KEY-----\\r\\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQAB\\r\\n-----END
+            PUBLIC KEY-----"
+      xml:
+        name: PublicKeyPem

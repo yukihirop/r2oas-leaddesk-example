@@ -1,0 +1,9 @@
+---
+components:
+  requestBodies:
+    CustomPageBlocksInput:
+      content:
+        application/json:
+          schema:
+            "$ref": "#/components/schemas/CustomPageBlocksInput"
+      description: Request body containing new values

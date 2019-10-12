@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    ApiException:
+      properties:
+        error:
+          description: Logical key of an error
+          type: string
+          example: access_denied
+        error_description:
+          description: Human readable description of an error
+          type: string
+          example: The resource owner or authorization server denied the request.
+      xml:
+        name: ApiException

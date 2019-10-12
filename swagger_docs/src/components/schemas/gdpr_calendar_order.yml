@@ -1,0 +1,30 @@
+---
+components:
+  schemas:
+    GdprCalendarOrder:
+      properties:
+        created_at:
+          type: string
+          format: date-time
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone_number:
+          type: string
+        address:
+          type: string
+        postal_code:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        company:
+          type: string
+        vatin:
+          type: string
+      xml:
+        name: GdprCalendarOrder

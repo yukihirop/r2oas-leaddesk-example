@@ -1,0 +1,13 @@
+---
+components:
+  schemas:
+    ApiKeysOAuthSearchableFields:
+      properties:
+        name:
+          description: OAuth client's name
+          type: string
+        creator_id:
+          description: OAuth client's creator id
+          type: string
+      xml:
+        name: ApiKeysOAuthSearchableFields

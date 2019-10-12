@@ -1,0 +1,15 @@
+---
+components:
+  schemas:
+    UserCollectionSkills:
+      xml:
+        name: UserCollectionSkills
+      allOf:
+      - "$ref": "#/components/schemas/UserCollection"
+      - properties:
+          skills:
+            description: Collection of user inbound skills
+            type: array
+            items:
+              "$ref": "#/components/schemas/SkillWithPoints"
+        type: object

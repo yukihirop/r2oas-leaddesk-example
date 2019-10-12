@@ -1,0 +1,783 @@
+---
+paths:
+  "/campaigns":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch campaigns
+      description: Fetch campaigns
+      parameters:
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      - "$ref": "#/components/parameters/search"
+      - name: search_fields
+        in: query
+        description: Limit the 'search' parameter to specific fields only
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - name
+            - office
+      - name: name
+        in: query
+        description: Filter results based on campaign name
+        required: false
+        schema:
+          type: string
+      - name: office
+        in: query
+        description: Filter results based on campaign office
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/CampaignCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - campaigns
+      summary: Create a new campaign
+      description: Create a new campaign
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PostCampaignInput"
+        description: Request body containing new values.
+      responses:
+        '200':
+          description: Successful operation. Returns newly create campaign id
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/genericIdObject"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch a campaign
+      description: Fetch a campaign.
+      operationId: getCampaignById
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation. Returns a campaign.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/CampaignObject"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - campaigns
+      summary: Delete a campaign
+      description: Delete a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - campaigns
+      summary: Modify an existing campaign
+      description: Modify an existing campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/PatchCampaignInput"
+        description: Request body containing new values. Overrides product group properties
+          and entire sub-resources with given values.
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/contact_lists":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch contact lists attached to a campaign
+      description: Fetch contact lists attached to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ContactListWithWeight"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - campaigns
+      summary: Add contact lists to a campaign
+      description: Add contact lists to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              property: contact_lists
+              type: array
+              items:
+                "$ref": "#/components/schemas/contactListIdAndWeight"
+        description: Request body comprising of objects each containing a contact_lists
+          id and optionally contact list weight
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - campaigns
+      summary: Remove all contact lists from campaign
+      description: Remove all contact lists from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - campaigns
+      summary: Set contact lists to a campaign
+      description: Set contact lists to a campaign. Removes existing contact lists
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              property: contact_lists
+              type: array
+              items:
+                "$ref": "#/components/schemas/genericIdObject"
+        description: Request body comprising of objects each containing a contact
+          list id
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/contact_lists/{contact_list_id}":
+    delete:
+      tags:
+      - campaigns
+      summary: Remove a contact list from campaign
+      description: Remove a contact list from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - name: contact_list_id
+        in: query
+        description: Contact list id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/product_groups":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch product groups attached to a campaign
+      description: Fetch product groups attached to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ProductGroupCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - campaigns
+      summary: Add product groups to a campaign
+      description: Add product groups to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray2"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - campaigns
+      summary: Remove all product groups from campaign
+      description: Remove all product groups from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - campaigns
+      summary: Set product groups to a campaign
+      description: Set product groups to a campaign. Removes existing product groups
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray2"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/product_groups/{product_group_id}":
+    delete:
+      tags:
+      - campaigns
+      summary: Remove a product group from campaign
+      description: Remove a product group from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - name: product_group_id
+        in: path
+        description: Product group id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/products":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch products attached to a campaign
+      description: Fetch products attached to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ProductCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - campaigns
+      summary: Add products to a campaign
+      description: Add products to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - campaigns
+      summary: Remove all products from campaign
+      description: Remove all products from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - campaigns
+      summary: Set products to a campaign
+      description: Set products to a campaign. Removes existing products
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/products/{product_id}":
+    delete:
+      tags:
+      - campaigns
+      summary: Remove a product from campaign
+      description: Remove a product from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - name: product_id
+        in: query
+        description: Product id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/users":
+    get:
+      tags:
+      - campaigns
+      summary: Fetch users attached to a campaign
+      description: Fetch users attached to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - "$ref": "#/components/parameters/page"
+      - "$ref": "#/components/parameters/per_page"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                properties:
+                  collection:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/UserCollection"
+                  _links:
+                    "$ref": "#/components/schemas/links"
+                  _meta:
+                    "$ref": "#/components/schemas/meta"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    post:
+      tags:
+      - campaigns
+      summary: Add users to a campaign
+      description: Add users to a campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray3"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    delete:
+      tags:
+      - campaigns
+      summary: Remove all users from campaign
+      description: Remove all users from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+    patch:
+      tags:
+      - campaigns
+      summary: Set users to a campaign
+      description: Set users to a campaign. Removes existing users
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      requestBody:
+        "$ref": "#/components/requestBodies/genericIdObjectArray3"
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        '422':
+          description: Validation error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ValidationException"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"
+  "/campaigns/{id}/users/{user_id}":
+    delete:
+      tags:
+      - campaigns
+      summary: Remove a user from campaign
+      description: Remove a user from campaign
+      parameters:
+      - name: id
+        in: path
+        description: Campaign id
+        required: true
+        schema:
+          type: integer
+      - name: user_id
+        in: query
+        description: User id
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          "$ref": "#/components/responses/204"
+        default:
+          description: Server rejection. Covers all HTTP 4xx errors except validation
+            error.
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/ApiException"

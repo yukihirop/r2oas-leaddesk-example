@@ -1,0 +1,10 @@
+---
+components:
+  schemas:
+    ActivitySearchableFields:
+      properties:
+        name:
+          description: Activity name
+          type: string
+      xml:
+        name: ActivitySearchableFields
