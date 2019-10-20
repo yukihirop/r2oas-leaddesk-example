@@ -12,4 +12,4 @@
 !/log/.keep
 /tmp
 
-/swagger_docs/swagger_doc.yml
+/oas_docs/oas_doc.yml
