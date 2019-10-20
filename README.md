@@ -17,7 +17,7 @@ $ docker pull swaggerapi/swagger-editor:latest
 
 ## 試し方
 
-`routes_to_swagger_docs` の設定に関しては、 `config/environments/development.rb` をご覧ください。
+`r2-oas` の設定に関しては、 `config/environments/development.rb` をご覧ください。
 (leaddeskの場合は必須な設定はありません。)
 
 OpenAPI(V3)形式に変換したAPIドキュメントが `leaddesk.json` として用意してあるのでそれを使います。
@@ -25,7 +25,7 @@ OpenAPI(V3)形式に変換したAPIドキュメントが `leaddesk.json` とし�
 ### 分析・分解
 
 ```bash
-$ SWAGGER_FILE=./leaddesk.json bundle exec rake routes:oas:analyze
+$ OAS_FILE=./leaddesk.json bundle exec rake routes:oas:analyze
 ```
 
 ### SwaggerUIで表示
